@@ -23,46 +23,55 @@ import com.example.ytmusic.R
 
 @Composable
 fun SpeedDial() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-       Row {
-           // Left side: Image + Column
-           Image(
-               painter = painterResource(id = R.drawable.profile),
-               contentDescription = "Profile Image",
-               contentScale = ContentScale.Crop, // ← This fills the circle nicely
-               modifier = Modifier
-                   .size(50.dp) // Set size ONCE
-                   .clip(CircleShape) // Clip AFTER size is locked in
-                   .padding()
-           )
+    Column(modifier = Modifier.fillMaxSize()
+        .padding( horizontal = 16.dp, vertical = 32.dp)) {
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(horizontalArrangement = Arrangement.spacedBy(15.dp)) {
+                // Left side: Image + Column
+                Image(
+                    painter = painterResource(id = R.drawable.profile),
+                    contentDescription = "Profile Image",
+                    contentScale = ContentScale.Crop, // ← This fills the circle nicely
+                    modifier = Modifier
+                        .size(48.dp) // Set size ONCE
+                        .clip(CircleShape) // Clip AFTER size is locked in
+                        .padding()
+                )
 
 
-           Column {
-               Text(text = "NOTHING STRIX", color = Color.Gray, fontSize = 14.sp)
-               Text(
-                   text = "Speed Dial",
-                   fontSize = 24.sp,
-                   fontWeight = FontWeight.Bold,
-                   color = Color.White
-               )
-           }
+                Column {
+                    Text(text = "NOTHING STRIX", color = Color.Gray, fontSize = 14.sp)
+                    Text(
+                        text = "Speed Dial",
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                }
 
 
-       }
-        // Right side: Arrow icon
-        IconButton(onClick = { /* TODO: Navigate or perform action */ }) {
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowRight,
-                contentDescription = "Arrow",
-                tint = Color.White
-            )
+            }
+            // Right side: Arrow icon
+            IconButton(onClick = { /* TODO: Navigate or perform action */ }) {
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowRight,
+                    contentDescription = "Arrow",
+                    tint = Color.White
+                )
+            }
         }
+
+        DashAlbums(albums = albums)
+
+
+
     }
 }
 

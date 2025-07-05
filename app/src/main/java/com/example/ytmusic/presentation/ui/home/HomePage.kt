@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.waterfall
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
@@ -34,6 +36,7 @@ import com.example.ytmusic.presentation.ui.component.CategoryView
 fun HomePage(){
 
     Column(modifier = Modifier.fillMaxSize()
+        .verticalScroll(rememberScrollState())
         .background(color = Color.Black)
         .padding(WindowInsets.waterfall.asPaddingValues())
     ) {
@@ -67,6 +70,9 @@ fun HomePage(){
 
 
         SpeedDial()
+
+
+        QuickPicks()
 
 
 
