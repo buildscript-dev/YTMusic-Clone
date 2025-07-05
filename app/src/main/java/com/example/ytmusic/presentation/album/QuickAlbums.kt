@@ -1,21 +1,5 @@
 package com.example.ytmusic.presentation.album
 
-import android.icu.lang.UCharacter.IndicPositionalCategory.NA
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.google.accompanist.pager.rememberPagerState
-
-
 data class QuickAlbum(
     val imageUrl: String,
     val name: String,
@@ -25,110 +9,81 @@ data class QuickAlbum(
 
 val quickAlbums = listOf(
     QuickAlbum(
-        imageUrl = "https://i.scdn.co/image/ab67616d0000b2732b80d11fbe7e1a4c9e065be5",
+        imageUrl = "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c1/4c/c2/c14cc284-e963-761e-210e-ca7b239b30f9/859753069389_cover.jpg/592x592bb.webp",
         name = "YKWIM",
-        artists = "Karan Aujla, KR$NA",
+        artists = "Karan Aujla, KRSNA",
         views = "2.3M views"
     ),
     QuickAlbum(
-        imageUrl = "https://i1.sndcdn.com/artworks-kUuYyWr06EK2xRCO-Q9PPaQ-t500x500.jpg",
+        imageUrl = "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/51/79/4c/51794c30-7dfb-e04f-dca1-30a26d233718/198588844908.jpg/592x592bb.webp",
         name = "Wavy",
         artists = "Twinbeatz",
         views = "1.7M views"
     ),
     QuickAlbum(
-        imageUrl = "https://c.saavncdn.com/165/Kesariya-From-Brahmastra-Hindi-2022-20220717131023-500x500.jpg",
-        name = "Kesariya",
-        artists = "Arijit Singh",
-        views = "12.4M views"
+        imageUrl = "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/b3/b5/d9/b3b5d986-7f6d-a860-b8aa-769e1eef1a92/8902894356299_cover.jpg/592x592bb.webp",
+        name = "Desi Kalakaar",
+        artists = "Yo Yo Honey Singh",
+        views = "100M+ views"
     ),
     QuickAlbum(
-        imageUrl = "https://c.saavncdn.com/815/Bhediya-Hindi-2023-20230927155213-500x500.jpg",
-        name = "Apna Bana Le",
-        artists = "Arijit Singh",
-        views = "8.5M views"
+        imageUrl = "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/7f/86/32/7f8632d0-dab1-2d58-af27-dfa7206a9cc9/8902633269552.jpg/592x592bb.webp",
+        name = "Brown Rang",
+        artists = "Yo Yo Honey Singh",
+        views = "150M+ views"
     ),
     QuickAlbum(
-        imageUrl = "https://c.saavncdn.com/344/Rab-Ne-Bana-Di-Jodi-Hindi-2008-500x500.jpg",
-        name = "Tujh Mein Rab Dikhta Hai",
-        artists = "Roop Kumar Rathod",
-        views = "9.1M views"
+        imageUrl = "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/e2/df/8f/e2df8f12-9599-1c34-9b40-f7dc8e4d71fb/859731512777_cover.jpg/592x592bb.webp",
+        name = "Don't Look",
+        artists = "Karan Aujla",
+        views = "4.5M views"
     ),
     QuickAlbum(
-        imageUrl = "https://c.saavncdn.com/985/Malang-Hindi-2020-20200207142805-500x500.jpg",
-        name = "Malang",
-        artists = "Ved Sharma",
-        views = "5.2M views"
+        imageUrl = "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/f8/a9/26/f8a926d7-aae8-46a2-739d-5d1795f2fdf5/8905285022148.jpg/592x592bb.webp",
+        name = "Mexico",
+        artists = "Karan Aujla",
+        views = "8.1M views"
     ),
     QuickAlbum(
-        imageUrl = "https://c.saavncdn.com/670/Jawan-Hindi-2023-20230921100719-500x500.jpg",
-        name = "Chaleya",
-        artists = "Arijit Singh, Shilpa Rao",
-        views = "10.6M views"
+        imageUrl = "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/53/85/04/5385046e-8f72-e026-556e-697f44e4f3f9/artwork.jpg/592x592bb.webp",
+        name = "Panjabi Trap",
+        artists = "Twinbeatz",
+        views = "3.3M views"
     ),
     QuickAlbum(
-        imageUrl = "https://c.saavncdn.com/171/Ghungroo-From-War--Hindi-2019-20190904054758-500x500.jpg",
-        name = "Ghungroo",
-        artists = "Arijit Singh, Shilpa Rao",
-        views = "7.3M views"
+        imageUrl = "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e2/61/f8/e261f8c1-73db-9a7a-c89e-1068f19970e0/16UMGIM67863.rgb.jpg/592x592bb.webp",
+        name = "Starboy",
+        artists = "The Weeknd",
+        views = "1.5B views"
     ),
     QuickAlbum(
-        imageUrl = "https://c.saavncdn.com/246/Shershaah-Hindi-2021-20210810161034-500x500.jpg",
-        name = "Raataan Lambiyan",
-        artists = "Jubin Nautiyal, Asees Kaur",
-        views = "14.8M views"
+        imageUrl = "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/15/54/05/1554058b-97b5-834b-1cff-39a4fb6075d8/190295827939.jpg/592x592bb.webp",
+        name = "Shape of You",
+        artists = "Ed Sheeran",
+        views = "3.2B views"
     ),
     QuickAlbum(
-        imageUrl = "https://c.saavncdn.com/579/Tera-Ban-Jaunga-From-Kabir-Singh--Hindi-2019-20190618030927-500x500.jpg",
-        name = "Tera Ban Jaunga",
-        artists = "Akhil Sachdeva, Tulsi Kumar",
-        views = "6.6M views"
+        imageUrl = "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/11/7a/b8/117ab805-6811-8929-18b9-0fad7baf0c25/17UMGIM98210.rgb.jpg/592x592bb.webp",
+        name = "Believer",
+        artists = "Imagine Dragons",
+        views = "2.1B views"
     ),
     QuickAlbum(
-        imageUrl = "https://c.saavncdn.com/061/Kal-Ho-Naa-Ho-Hindi-2003-20221028171450-500x500.jpg",
-        name = "Kal Ho Naa Ho",
-        artists = "Sonu Nigam",
-        views = "13.3M views"
-    ),
-    QuickAlbum(
-        imageUrl = "https://c.saavncdn.com/634/Galliyan-From-Ek-Villain--Hindi-2014-20220921051039-500x500.jpg",
-        name = "Galliyan",
-        artists = "Ankit Tiwari",
-        views = "8.9M views"
-    ),
-    QuickAlbum(
-        imageUrl = "https://c.saavncdn.com/132/Zara-Hatke-Zara-Bachke-Hindi-2023-20230601094658-500x500.jpg",
-        name = "Tere Vaaste",
-        artists = "Varun Jain, Sachin-Jigar",
-        views = "11.1M views"
-    ),
-    QuickAlbum(
-        imageUrl = "https://i.scdn.co/image/ab67616d0000b273e4ed164b7f35b644134b1f3a",
+        imageUrl = "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/c1/f1/3e/c1f13e56-448d-00f0-96d6-45fd50f97f40/886447612866.jpg/592x592bb.webp",
         name = "On My Way",
         artists = "Alan Walker",
         views = "200M+ views"
     ),
     QuickAlbum(
-        imageUrl = "https://i.scdn.co/image/ab67616d0000b2737c3f9324d28e3d5e83a8c0f3",
+        imageUrl = "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/a6/6e/bf/a66ebf79-5008-8948-b352-a790fc87446b/19UM1IM04638.rgb.jpg/592x592bb.webp",
         name = "Blinding Lights",
         artists = "The Weeknd",
         views = "1.1B views"
     ),
     QuickAlbum(
-        imageUrl = "https://i.scdn.co/image/ab67616d0000b273d9b5d9c2d7f21dcf61f4ed8e",
+        imageUrl = "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/14/e4/98/14e49846-57a9-dc8d-6fa3-5e03ccf3606c/dj.ljogvxod.jpg/592x592bb.webp",
         name = "Night Changes",
         artists = "One Direction",
         views = "550M views"
     )
 )
-
-
-//@Composable
-//fun QuickPickAlbum(quickAlbums: List<QuickAlbum>){
-//
-//    LazyHorizontalGrid(modifier = Modifier.fillMaxWidth()) {
-//        quick
-//
-//    }
-//
-//}

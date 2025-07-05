@@ -1,14 +1,12 @@
 package com.example.ytmusic.presentation.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.aspectRatio
+
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Card
@@ -30,32 +28,25 @@ import androidx.compose.ui.text.style.TextAlign
 data class Album(val name: String, val imageUrl: String)
 
 val albums = listOf(
-    Album("Ykwim (feat. Karan Aujla)", "https://i.scdn.co/image/ab67616d0000b2732b80d11fbe7e1a4c9e065be5"),
-    Album("Wavy (feat. Twinbeatz)", "https://i1.sndcdn.com/artworks-kUuYyWr06EK2xRCO-Q9PPaQ-t500x500.jpg"),
-    Album("Kesariya – Brahmāstra","https://c.saavncdn.com/165/Kesariya-From-Brahmastra-Hindi-2022-20220717131023-500x500.jpg"),
+    Album("Ykwim (feat. Karan Aujla)","https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c1/4c/c2/c14cc284-e963-761e-210e-ca7b239b30f9/859753069389_cover.jpg/592x592bb.webp",),
+    Album("Wavy (feat. Twinbeatz)", "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/51/79/4c/51794c30-7dfb-e04f-dca1-30a26d233718/198588844908.jpg/592x592bb.webp",),
+    Album("Kesariya – Brahmāstra","https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/9f/13/ca/9f13ca3b-e533-03e0-f19a-f0aaa774581d/196589311191.jpg/592x592bb.webp"),
     Album("Apna Bana Le – Bhediya", "https://c.saavncdn.com/815/Bhediya-Hindi-2023-20230927155213-500x500.jpg"),
     Album("Tujh Mein Rab Dikhta Hai – Rab Ne Bana Di Jodi","https://c.saavncdn.com/344/Rab-Ne-Bana-Di-Jodi-Hindi-2008-500x500.jpg"),
-    Album("Malang – Malang", "https://c.saavncdn.com/985/Malang-Hindi-2020-20200207142805-500x500.jpg"),
-    Album("Chaleya – Jawan", "https://c.saavncdn.com/670/Jawan-Hindi-2023-20230921100719-500x500.jpg"),
-    Album("Ghungroo – War", "https://c.saavncdn.com/171/Ghungroo-From-War--Hindi-2019-20190904054758-500x500.jpg"),
-    Album("Raataan Lambiyan – Shershaah", "https://c.saavncdn.com/246/Shershaah-Hindi-2021-20210810161034-500x500.jpg"),
-    Album("Tera Ban Jaunga – Kabir Singh", "https://c.saavncdn.com/579/Tera-Ban-Jaunga-From-Kabir-Singh--Hindi-2019-20190618030927-500x500.jpg"),
-    Album("Kal Ho Naa Ho – Title Track", "https://c.saavncdn.com/061/Kal-Ho-Naa-Ho-Hindi-2003-20221028171450-500x500.jpg"),
-    Album("Galliyan – Ek Villain", "https://c.saavncdn.com/634/Galliyan-From-Ek-Villain--Hindi-2014-20220921051039-500x500.jpg"),
-    Album("Tere Vaaste – Zara Hatke Zara Bachke", "https://c.saavncdn.com/132/Zara-Hatke-Zara-Bachke-Hindi-2023-20230601094658-500x500.jpg"), Album("Ykwim (feat. Karan Aujla)", "https://i.scdn.co/image/ab67616d0000b2732b80d11fbe7e1a4c9e065be5"), Album("Ykwim (feat. Karan Aujla)", "https://i.scdn.co/image/ab67616d0000b2732b80d11fbe7e1a4c9e065be5"),
-    Album("Wavy (feat. Twinbeatz)", "https://i1.sndcdn.com/artworks-kUuYyWr06EK2xRCO-Q9PPaQ-t500x500.jpg"),
-    Album("Kesariya – Brahmāstra","https://c.saavncdn.com/165/Kesariya-From-Brahmastra-Hindi-2022-20220717131023-500x500.jpg"),
-    Album("Apna Bana Le – Bhediya", "https://c.saavncdn.com/815/Bhediya-Hindi-2023-20230927155213-500x500.jpg"),
-    Album("Tujh Mein Rab Dikhta Hai – Rab Ne Bana Di Jodi","https://c.saavncdn.com/344/Rab-Ne-Bana-Di-Jodi-Hindi-2008-500x500.jpg"),
-    Album("Malang – Malang", "https://c.saavncdn.com/985/Malang-Hindi-2020-20200207142805-500x500.jpg"),
-    Album("Chaleya – Jawan", "https://c.saavncdn.com/670/Jawan-Hindi-2023-20230921100719-500x500.jpg"),
-    Album("Ghungroo – War", "https://c.saavncdn.com/171/Ghungroo-From-War--Hindi-2019-20190904054758-500x500.jpg"),
-    Album("Raataan Lambiyan – Shershaah", "https://c.saavncdn.com/246/Shershaah-Hindi-2021-20210810161034-500x500.jpg"),
-    Album("Tera Ban Jaunga – Kabir Singh", "https://c.saavncdn.com/579/Tera-Ban-Jaunga-From-Kabir-Singh--Hindi-2019-20190618030927-500x500.jpg"),
-    Album("Kal Ho Naa Ho – Title Track", "https://c.saavncdn.com/061/Kal-Ho-Naa-Ho-Hindi-2003-20221028171450-500x500.jpg"),
-    Album("Galliyan – Ek Villain", "https://c.saavncdn.com/634/Galliyan-From-Ek-Villain--Hindi-2014-20220921051039-500x500.jpg"),
-    Album("Tere Vaaste – Zara Hatke Zara Bachke", "https://c.saavncdn.com/132/Zara-Hatke-Zara-Bachke-Hindi-2023-20230601094658-500x500.jpg")
-)
+    Album("Malang – Malang", "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/1a/db/e0/1adbe03a-4256-94fe-a432-1c70119a61f0/849486012318_cover.jpg/592x592bb.webp"),
+    Album("Desi Kalakaar", "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/b3/b5/d9/b3b5d986-7f6d-a860-b8aa-769e1eef1a92/8902894356299_cover.jpg/592x592bb.webp"),
+    Album("Brown Rang", "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/7f/86/32/7f8632d0-dab1-2d58-af27-dfa7206a9cc9/8902633269552.jpg/592x592bb.webp"),
+    Album("Don't Look", "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/e2/df/8f/e2df8f12-9599-1c34-9b40-f7dc8e4d71fb/859731512777_cover.jpg/592x592bb.webp"),
+    Album("Mexico", "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/f8/a9/26/f8a926d7-aae8-46a2-739d-5d1795f2fdf5/8905285022148.jpg/592x592bb.webp"),
+    Album("Panjabi Trap", "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/53/85/04/5385046e-8f72-e026-556e-697f44e4f3f9/artwork.jpg/592x592bb.webp"),
+    Album("Starboy", "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e2/61/f8/e261f8c1-73db-9a7a-c89e-1068f19970e0/16UMGIM67863.rgb.jpg/592x592bb.webp"),
+    Album("Shape of You", "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/15/54/05/1554058b-97b5-834b-1cff-39a4fb6075d8/190295827939.jpg/592x592bb.webp"),
+    Album("Believer", "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/11/7a/b8/117ab805-6811-8929-18b9-0fad7baf0c25/17UMGIM98210.rgb.jpg/592x592bb.webp"),
+    Album("On My Way", "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/c1/f1/3e/c1f13e56-448d-00f0-96d6-45fd50f97f40/886447612866.jpg/592x592bb.webp"),
+    Album("Blinding Lights", "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/a6/6e/bf/a66ebf79-5008-8948-b352-a790fc87446b/19UM1IM04638.rgb.jpg/592x592bb.webp"),
+    Album("Night Changes", "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/14/e4/98/14e49846-57a9-dc8d-6fa3-5e03ccf3606c/dj.ljogvxod.jpg/592x592bb.webp")
+
+    )
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -66,8 +57,7 @@ fun DashAlbums(albums: List<Album>) {
 
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         HorizontalPager(
@@ -75,25 +65,27 @@ fun DashAlbums(albums: List<Album>) {
             state = pagerState,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(400.dp)
+                .height(380.dp)
 //                .aspectRatio(1f) // make it square like yours
         ) { page ->
             LazyVerticalGrid(
                 columns = GridCells.Fixed(3),
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 4.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 items(pages[page]) { album ->
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .padding(4.dp)
+                        modifier = Modifier.padding(2.dp) // just a bit of space around each item
                     ) {
                         Card(
+                            shape = RoundedCornerShape(8.dp),
                             modifier = Modifier
-                                .size(100.dp),
-                            shape = RoundedCornerShape(12.dp)
+                                .fillMaxWidth() // take full grid cell width
+                                .aspectRatio(1f) // stay square
                         ) {
                             AsyncImage(
                                 model = album.imageUrl,
@@ -102,18 +94,24 @@ fun DashAlbums(albums: List<Album>) {
                                 modifier = Modifier.fillMaxSize()
                             )
                         }
-                        Spacer(modifier = Modifier.height(4.dp))
+
+                        Spacer(modifier = Modifier.height(6.dp))
+
                         Text(
                             text = album.name,
                             fontSize = 12.sp,
                             color = Color.White,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            textAlign = TextAlign.Center
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth()
                         )
                     }
                 }
             }
+
+
+
         }
 
         // Dot Indicators

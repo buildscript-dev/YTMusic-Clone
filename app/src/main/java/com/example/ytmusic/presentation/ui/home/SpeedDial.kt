@@ -1,7 +1,6 @@
 package com.example.ytmusic.presentation.ui.home
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -24,7 +23,7 @@ import com.example.ytmusic.R
 @Composable
 fun SpeedDial() {
     Column(modifier = Modifier.fillMaxSize()
-        .padding( horizontal = 16.dp, vertical = 32.dp)) {
+        .padding( horizontal = 16.dp, vertical = 16.dp)) {
 
         Row(
             modifier = Modifier
@@ -34,14 +33,14 @@ fun SpeedDial() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Row(horizontalArrangement = Arrangement.spacedBy(15.dp)) {
-                // Left side: Image + Column
+
                 Image(
                     painter = painterResource(id = R.drawable.profile),
                     contentDescription = "Profile Image",
-                    contentScale = ContentScale.Crop, // ← This fills the circle nicely
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .size(48.dp) // Set size ONCE
-                        .clip(CircleShape) // Clip AFTER size is locked in
+                        .size(48.dp)
+                        .clip(CircleShape)
                         .padding()
                 )
 
@@ -58,7 +57,7 @@ fun SpeedDial() {
 
 
             }
-            // Right side: Arrow icon
+
             IconButton(onClick = { /* TODO: Navigate or perform action */ }) {
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowRight,
