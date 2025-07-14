@@ -1,5 +1,8 @@
 package com.example.ytmusic.presentation.ui.home
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +21,12 @@ import coil.compose.AsyncImage
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.*
@@ -51,6 +59,8 @@ val albums = listOf(
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun DashAlbums(albums: List<Album>) {
+    val onClickBorder by remember { mutableStateOf(true) }
+    var isBorder by remember { mutableStateOf(false) }
     val itemsPerPage = 9
     val pages = albums.chunked(itemsPerPage)
     val pagerState = rememberPagerState()
@@ -65,7 +75,7 @@ fun DashAlbums(albums: List<Album>) {
             state = pagerState,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(380.dp)
+                .height(320.dp)
 //                .aspectRatio(1f) // make it square like yours
         ) { page ->
             LazyVerticalGrid(
@@ -81,37 +91,47 @@ fun DashAlbums(albums: List<Album>) {
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.padding(2.dp) // just a bit of space around each item
                     ) {
-                        Card(
-                            shape = RoundedCornerShape(8.dp),
+                        Box(
                             modifier = Modifier
-                                .fillMaxWidth() // take full grid cell width
-                                .aspectRatio(1f) // stay square
-                        ) {
-                            AsyncImage(
-                                model = album.imageUrl,
-                                contentDescription = album.name,
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.height(6.dp))
-
-                        Text(
-                            text = album.name,
-                            fontSize = 12.sp,
-                            color = Color.White,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth()
+                                .fillMaxWidth()
+//                                .then(
+//                                    if (onClickBorder) {
+//                                        Modifier
+//                                            .clickable {
+//                                                isBorder = !isBorder // toggle border on click
+//                                            }
+//                                            .border(
+//                                                width = if (isBorder) 4.dp else 0.dp,
+//                                                color = Color.White,
+//                                                shape = RoundedCornerShape(8.dp)
+//                                            )
+//                                    } else {
+//                                        Modifier // just skip clickable and border
+//                                    })
+                                .aspectRatio(1f)
+                                .clip(shape = RoundedCornerShape(8.dp))
+                        ){AsyncImage(
+                            model = album.imageUrl,
+                            contentDescription = album.name,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.fillMaxSize()
                         )
+                            Text(
+                                text = album.name,
+                                fontSize = 12.sp,
+                                color = Color.White,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.fillMaxWidth()
+                                    .align(Alignment.BottomCenter)
+                                    .background(color = Color.Black.copy(alpha = 0.3f))
+                            )
+
+                        }
                     }
                 }
             }
-
-
-
         }
 
         // Dot Indicators

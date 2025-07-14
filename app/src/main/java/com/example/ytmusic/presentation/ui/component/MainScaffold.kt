@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
@@ -88,7 +89,9 @@ fun MainScaffold(navController: NavHostController) {
                 .fillMaxSize()
                 .padding(innerPadding)
                 .background(Color.Black)
+
         ) {
+
             BottomNavGraph(navController = navController)
         }
     }

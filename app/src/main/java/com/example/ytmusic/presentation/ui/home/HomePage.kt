@@ -41,6 +41,14 @@ fun HomePage(navController: NavController) {
             item {
                 QuickPickList(quickAlbums = quickAlbums)
             }
+
+            item {
+                MusicVideoList()
+            }
+            item {
+                AlbumsForList()
+            }
+
         }
     }
 }

@@ -2,7 +2,9 @@ package com.example.ytmusic.presentation.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.LibraryMusic
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.*
@@ -28,8 +30,8 @@ sealed class BottomNavItem(
 ) {
     object Home : BottomNavItem("home", Icons.Default.Home, "Home")
     object Samples : BottomNavItem("samples", Icons.Default.PlayArrow, "Samples")
-    object Explore : BottomNavItem("explore", Icons.Default.CheckCircle, "Explore")
-    object Library : BottomNavItem("library", Icons.Default.Menu, "Library")
+    object Explore : BottomNavItem("explore", Icons.Default.Explore, "Explore")
+    object Library : BottomNavItem("library", Icons.Default.LibraryMusic, "Library")
 }
 
 // 🔀 Bottom Navigation Graph

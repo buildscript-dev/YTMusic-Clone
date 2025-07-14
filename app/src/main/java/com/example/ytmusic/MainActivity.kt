@@ -1,5 +1,6 @@
 package com.example.ytmusic
 
+import PlayerScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,7 +20,8 @@ class MainActivity : ComponentActivity() {
 
             MaterialTheme {
                 Surface {
-                    MainScaffold(navController = navController)
+//                    MainScaffold(navController = navController)
+                    PlayerScreen()
                 }
             }
         }

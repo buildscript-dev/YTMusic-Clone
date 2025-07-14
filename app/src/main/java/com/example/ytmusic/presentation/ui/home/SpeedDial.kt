@@ -23,7 +23,7 @@ import com.example.ytmusic.R
 @Composable
 fun SpeedDial() {
     Column(modifier = Modifier.fillMaxSize()
-        .padding( horizontal = 16.dp, vertical = 16.dp)) {
+        .padding( horizontal = 8.dp, vertical = 16.dp)) {
 
         Row(
             modifier = Modifier
@@ -32,14 +32,15 @@ fun SpeedDial() {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(horizontalArrangement = Arrangement.spacedBy(15.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(15.dp),
+                verticalAlignment = Alignment.CenterVertically) {
 
                 Image(
                     painter = painterResource(id = R.drawable.profile),
                     contentDescription = "Profile Image",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .size(48.dp)
+                        .size(38.dp)
                         .clip(CircleShape)
                         .padding()
                 )
@@ -49,7 +50,7 @@ fun SpeedDial() {
                     Text(text = "NOTHING STRIX", color = Color.Gray, fontSize = 14.sp)
                     Text(
                         text = "Speed Dial",
-                        fontSize = 24.sp,
+                        fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.White
                     )
@@ -58,7 +59,7 @@ fun SpeedDial() {
 
             }
 
-            IconButton(onClick = { /* TODO: Navigate or perform action */ }) {
+            IconButton(onClick = {}) {
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowRight,
                     contentDescription = "Arrow",

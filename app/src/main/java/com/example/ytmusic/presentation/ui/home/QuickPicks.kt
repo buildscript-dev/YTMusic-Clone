@@ -88,8 +88,8 @@ fun QuickPickList(quickAlbums: List<QuickAlbum>) {
                         )
                         Text(
                             text = "${album.artists} • ${album.views}",
-                            fontSize = 13.sp,
-                            color = Color.Gray,
+                            fontSize = 14.sp,
+                            color = Color.LightGray,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
