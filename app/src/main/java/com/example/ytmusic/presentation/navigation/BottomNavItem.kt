@@ -20,6 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.ytmusic.presentation.ui.explore.ExploreScreen
 import com.example.ytmusic.presentation.ui.home.HomePage
 import com.example.ytmusic.presentation.ui.library.LibraryScreen
+import com.example.ytmusic.presentation.ui.player.PlayerScreen
 import com.example.ytmusic.presentation.ui.sample.SampleScreen
 
 // 🔖 Sealed class to define bottom nav items
@@ -32,6 +33,7 @@ sealed class BottomNavItem(
     object Samples : BottomNavItem("samples", Icons.Default.PlayArrow, "Samples")
     object Explore : BottomNavItem("explore", Icons.Default.Explore, "Explore")
     object Library : BottomNavItem("library", Icons.Default.LibraryMusic, "Library")
+    object Player : BottomNavItem("player", Icons.Default.PlayArrow, "Player")
 }
 
 // 🔀 Bottom Navigation Graph
@@ -52,6 +54,9 @@ fun BottomNavGraph(navController: NavHostController) {
         }
         composable(BottomNavItem.Library.route) {
             LibraryScreen(navController)
+        }
+        composable(BottomNavItem.Player.route) {
+            PlayerScreen(navController)
         }
     }
 }

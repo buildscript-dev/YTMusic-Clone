@@ -20,12 +20,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.media3.common.MediaItem
+import androidx.navigation.NavController
 import com.example.ytmusic.R
 import com.example.ytmusic.data.remote.songList
 
 
 @Composable
-fun PlayerScreen() {
+fun PlayerScreen(navController: NavController) {
     val context = LocalContext.current
     val viewModel: ExoPlayerViewModel = viewModel()
     val exoPlayer = viewModel.exoPlayer
@@ -53,7 +54,6 @@ fun PlayerScreen() {
         if (isPlaying) exoPlayer.play() else exoPlayer.pause()
     }
 
-    // 🧱 UI layout
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -84,7 +84,6 @@ fun PlayerScreen() {
         }
     }
 
-    // 🧼 Cleanup
     DisposableEffect(Unit) {
         onDispose {
             exoPlayer.release()

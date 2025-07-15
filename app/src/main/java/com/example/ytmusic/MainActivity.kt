@@ -20,8 +20,8 @@ class MainActivity : ComponentActivity() {
 
             MaterialTheme {
                 Surface {
-//                    MainScaffold(navController = navController)
-                    PlayerScreen()
+                    MainScaffold(navController = navController)
+//                    PlayerScreen()
                 }
             }
         }
