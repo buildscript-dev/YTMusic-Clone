@@ -107,4 +107,3 @@ fun QuickPickList(quickAlbums: List<QuickAlbum>) {
         }
     }
 }
-

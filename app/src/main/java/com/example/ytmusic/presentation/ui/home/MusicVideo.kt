@@ -49,89 +49,89 @@ val musicVideo = listOf(
 
 @Composable
 fun MusicVideoList() {
-        Row(
-            modifier = Modifier.fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 12.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "Music Video for you",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
-            )
+    Row(
+        modifier = Modifier.fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = "Music Video for you",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White
+        )
 
-            Box(
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .border(
-                        width = 1.dp,
-                        color = Color.DarkGray,
-                        shape = CircleShape
-                    )
-                    .padding(horizontal = 12.dp, vertical = 4.dp)
-                    .clickable {}
-            ) {
-                Text("Play all", color = Color.White, fontSize = 14.sp)
-            }
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        LazyRow(
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 4.dp, start = 14.dp)
+                .clip(CircleShape)
+                .border(
+                    width = 1.dp,
+                    color = Color.DarkGray,
+                    shape = CircleShape
+                )
+                .padding(horizontal = 12.dp, vertical = 4.dp)
+                .clickable {}
         ) {
-            items(musicVideo) { video ->
-                Column(
+            Text("Play all", color = Color.White, fontSize = 14.sp)
+        }
+    }
+
+    Spacer(modifier = Modifier.height(8.dp))
+
+    LazyRow(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 4.dp, start = 14.dp)
+    ) {
+        items(musicVideo) { video ->
+            Column(
+                modifier = Modifier
+                    .padding(end = 12.dp)
+                    .width(290.dp)
+            ) {
+
+                Box(
                     modifier = Modifier
-                        .padding(end = 12.dp)
-                        .width(290.dp)
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .clip(RoundedCornerShape(8.dp))
                 ) {
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(200.dp)
-                            .clip(RoundedCornerShape(8.dp))
-                    ) {
-                        AsyncImage(
-                            model = video.imageUrl,
-                            contentDescription = video.title,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize()
-                        )
-
-                        Icon(
-                            imageVector = Icons.Default.MoreHoriz,
-                            contentDescription = "More Options",
-                            tint = Color.White,
-                            modifier = Modifier
-                                .align(Alignment.BottomEnd)
-                                .padding(4.dp)
-                        )
-                    }
-
-                    Text(
-                        text = video.title,
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 16.sp,
-                        color = Color.White,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.padding(top = 4.dp)
+                    AsyncImage(
+                        model = video.imageUrl,
+                        contentDescription = video.title,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.fillMaxSize()
                     )
 
-                    Text(
-                        text = "${video.artists} • ${video.view}",
-                        fontSize = 14.sp,
-                        color = Color.LightGray,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
+                    Icon(
+                        imageVector = Icons.Default.MoreHoriz,
+                        contentDescription = "More Options",
+                        tint = Color.White,
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(4.dp)
                     )
                 }
-          }
+
+                Text(
+                    text = video.title,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 16.sp,
+                    color = Color.White,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+
+                Text(
+                    text = "${video.artists} • ${video.view}",
+                    fontSize = 14.sp,
+                    color = Color.LightGray,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+        }
     }
 }

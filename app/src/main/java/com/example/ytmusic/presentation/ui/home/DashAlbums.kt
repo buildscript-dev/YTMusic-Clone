@@ -54,7 +54,7 @@ val albums = listOf(
     Album("Blinding Lights", "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/a6/6e/bf/a66ebf79-5008-8948-b352-a790fc87446b/19UM1IM04638.rgb.jpg/592x592bb.webp"),
     Album("Night Changes", "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/14/e4/98/14e49846-57a9-dc8d-6fa3-5e03ccf3606c/dj.ljogvxod.jpg/592x592bb.webp")
 
-    )
+)
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -143,4 +143,3 @@ fun DashAlbums(albums: List<Album>) {
         )
     }
 }
-

@@ -1,263 +1,182 @@
-import android.R.attr.contentDescription
-import android.R.attr.tint
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+package com.example.ytmusic.presentation.ui.player
+
+import SongPreview
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Cast
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Repeat
-import androidx.compose.material.icons.filled.SkipNext
-import androidx.compose.material.icons.filled.SkipPrevious
-import androidx.compose.material.icons.filled.ThumbUp
-import androidx.compose.material.icons.outlined.Shuffle
-import androidx.compose.material.icons.outlined.ThumbDown
-import androidx.compose.material.icons.outlined.ThumbUp
-import androidx.compose.material.icons.rounded.PlayCircle
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.media3.common.MediaItem
+import com.example.ytmusic.R
+import com.example.ytmusic.data.remote.songList
 
 
 @Composable
 fun PlayerScreen() {
+    val context = LocalContext.current
+    val viewModel: ExoPlayerViewModel = viewModel()
+    val exoPlayer = viewModel.exoPlayer
+
+    // ✅ Collecting flows properly
+    val isPlaying by viewModel.isPlaying.collectAsState()
+    val position by viewModel.position.collectAsState()
+    val duration by viewModel.duration.collectAsState()
+
     var selectedTab by remember { mutableStateOf("Song") }
 
+    // 🔁 Update media source when switching tabs
+    LaunchedEffect(selectedTab) {
+        val mediaUri = if (selectedTab == "Song") {
+            Uri.parse("android.resource://${context.packageName}/${R.raw.musicstar}")
+        } else {
+            Uri.parse("android.resource://${context.packageName}/${R.raw.starboy}")
+        }
+
+        val currentPos = exoPlayer.currentPosition
+        exoPlayer.setMediaItem(MediaItem.fromUri(mediaUri))
+        exoPlayer.prepare()
+        exoPlayer.seekTo(currentPos)
+
+        if (isPlaying) exoPlayer.play() else exoPlayer.pause()
+    }
+
+    // 🧱 UI layout
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
             .padding(WindowInsets.systemBars.asPaddingValues())
     ) {
+        PlayerTop(
+            selectedTab = selectedTab,
+            onTabSelected = { selectedTab = it }
+        )
+
+        if (selectedTab == "Song") {
+            SongPreview(
+                viewModel = viewModel,
+                onPlayPauseToggle = {
+                    if (isPlaying) viewModel.pause() else viewModel.play()
+                },
+                onSeek = { pos -> viewModel.seekTo(pos) }
+            )
+        } else {
+            VideoScreen(
+                viewModel = viewModel,
+                onPlayPauseToggle = {
+                    if (isPlaying) viewModel.pause() else viewModel.play()
+                },
+                onSeek = { pos -> viewModel.seekTo(pos) }
+            )
+        }
+    }
+
+    // 🧼 Cleanup
+    DisposableEffect(Unit) {
+        onDispose {
+            exoPlayer.release()
+        }
+    }
+}
+
+
+@Composable
+fun PlayerTop(
+    selectedTab: String,
+    onTabSelected: (String) -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 12.dp, vertical = 10.dp)
+    ) {
+        // ⬅️ Left Arrow
+        Icon(
+            imageVector = Icons.Default.KeyboardArrowDown,
+            contentDescription = "Arrow Down",
+            tint = Color.Gray,
+            modifier = Modifier.align(Alignment.CenterStart)
+        )
+
+        // 🎵 Tab Selector (Center)
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+                .align(Alignment.Center)
+                .clip(RoundedCornerShape(25.dp))
+                .background(Color.DarkGray)
         ) {
-            // Left Icon
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowDown,
-                contentDescription = "Arrow Down",
-                tint = Color.Gray
-            )
-
-            // Middle: Tab Selector Box
+            // Song Tab
             Box(
                 modifier = Modifier
+                    .height(30.dp)
                     .clip(RoundedCornerShape(25.dp))
-                    .background(Color.DarkGray)
+                    .background(
+                        if (selectedTab == "Song") Color.Gray else Color.DarkGray.copy(alpha = 0.7f)
+                    )
+                    .clickable { onTabSelected("Song") }
+                    .padding(horizontal = 16.dp),
+                contentAlignment = Alignment.Center
             ) {
-                Row(
-                    modifier = Modifier.padding(4.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    // "Song" Tab
-                    Box(
-                        modifier = Modifier
-                            .padding(horizontal = 4.dp)
-                            .clip(RoundedCornerShape(25.dp))
-                            .background(
-                                if (selectedTab == "Song") Color.LightGray else Color.DarkGray
-                            )
-                            .clickable { selectedTab = "Song" }
-                            .padding(vertical = 6.dp, horizontal = 12.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "Song",
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        )
-                    }
-
-                    // "Video" Tab
-                    Box(
-                        modifier = Modifier
-                            .padding(horizontal = 4.dp)
-                            .clip(RoundedCornerShape(25.dp))
-                            .background(
-                                if (selectedTab == "Video") Color.LightGray else Color.DarkGray
-                            )
-                            .clickable { selectedTab = "Video" }
-                            .padding(vertical = 6.dp, horizontal = 12.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "Video",
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        )
-                    }
-                }
+                Text(
+                    text = "Song",
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
             }
 
-            // Right Icons
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                IconButton(onClick = {}) {
-                    Icon(imageVector = Icons.Default.Cast,
+            // Video Tab
+            Box(
+                modifier = Modifier
+                    .height(30.dp)
+                    .clip(RoundedCornerShape(25.dp))
+                    .background(
+                        if (selectedTab == "Video") Color.Gray else Color.DarkGray.copy(alpha = 0.7f)
+                    )
+                    .clickable { onTabSelected("Video") }
+                    .padding(horizontal = 16.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Video",
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+            }
+        }
+
+        // ➡️ Right Icons
+        Row(
+            modifier = Modifier.align(Alignment.CenterEnd),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(1.dp)
+        ) {
+            IconButton(onClick = {}) {
+                Icon(
+                    imageVector = Icons.Default.Cast,
                     contentDescription = "Cast",
-                    tint = Color.LightGray,
-                    modifier = Modifier.padding(start = 8.dp))
-                }
-
-
-               IconButton(onClick = {}) {Icon(
+                    tint = Color.LightGray
+                )
+            }
+            IconButton(onClick = {}) {
+                Icon(
                     imageVector = Icons.Default.MoreVert,
                     contentDescription = "More Options",
-                    tint = Color.LightGray,
-                    modifier = Modifier.padding(start = 8.dp)
+                    tint = Color.LightGray
                 )
-               }
             }
         }
-
-        //Video/Song Album
-
-
-
-        // title
-        Text("One of One",
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            fontSize = 26.sp,
-            modifier = Modifier.padding(top =20.dp, start = 20.dp))
-
-        //artist Name
-        Text("Jerry",
-            color = Color.LightGray,
-            fontSize = 16.sp,
-            modifier = Modifier.padding(top = 4.dp, start = 20.dp))
-
-
-        //Like/Dislike Button
-        Box(modifier = Modifier
-            .padding(18.dp)
-            .clip(RoundedCornerShape(25.dp))
-            .background(Color.DarkGray)
-            .wrapContentSize()){
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 10.dp,),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                IconButton(onClick = {}){
-                    Icon(imageVector = Icons.Outlined.ThumbUp,
-                        contentDescription  = "Like",
-                        tint = Color.LightGray,)
-                }
-
-                Box(
-                    modifier = Modifier
-                        .width(1.dp)
-                        .height(24.dp)
-                        .background(Color.LightGray)
-                )
-
-                IconButton(onClick = {}){
-                    Icon(imageVector = Icons.Outlined.ThumbDown,
-                        contentDescription  = "Dislike",
-                        tint = Color.LightGray)
-                }
-            }
-        }
-
-        //slider
-
-
-        //time lamos
-
-
-
-        //play/pause/skip buttons
-
-        Row(modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround) {
-            IconButton(onClick = {}){
-                Icon(imageVector = Icons.Outlined.Shuffle,
-                    contentDescription = "Like",
-                    tint = Color.LightGray)
-            }
-            IconButton(onClick = {}){
-                Icon(imageVector = Icons.Default.SkipPrevious,
-                    contentDescription = "Like",
-                    tint = Color.White,
-                    modifier = Modifier.size(40.dp))
-
-            }
-            IconButton(onClick = {}){
-                Icon(imageVector = Icons.Rounded.PlayCircle,
-                    contentDescription = "Like",
-                    tint = Color.White,
-                    modifier = Modifier.size(90.dp))
-            }
-            IconButton(onClick = {}){
-                Icon(imageVector = Icons.Default.SkipNext,
-                    contentDescription = "Like",
-                    tint = Color.White,
-                    modifier = Modifier.size(40.dp))
-
-            }
-            IconButton(onClick = {}){
-                Icon(imageVector = Icons.Default.Repeat,
-                    contentDescription = "Like",
-                    tint = Color.LightGray)
-            }
-        }
-
-        //Suggesstion
-
-        Row(modifier = Modifier.fillMaxWidth()
-            .padding(vertical = 30.dp,
-                horizontal = 30.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically) {
-
-            SelectionContainer {
-                Text("UP NEXT",
-                    fontSize = 15.sp,
-                    color = Color.LightGray)
-            }
-            SelectionContainer {
-                Text("LYRICS",
-                    fontSize = 15.sp,
-                    color = Color.LightGray)
-            }
-            SelectionContainer {
-                Text("RELATED",
-                    fontSize = 15.sp,
-                    color = Color.LightGray)
-            }
-
-
-        }
-
-
-
-
-
-
-
-
-
-
     }
 }

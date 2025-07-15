@@ -17,7 +17,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.EMobiledata
 import androidx.compose.material.icons.filled.Explicit
 import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material3.Icon
@@ -168,12 +167,12 @@ fun AlbumsForList() {
                     Icon(imageVector = Icons.Default.Explicit, contentDescription = "E MobileData", tint = Color.LightGray)
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(
-                    text = "${albumList.albEp} • ${albumList.artists}",
-                    fontSize = 14.sp,
-                    color = Color.LightGray,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                ) }
+                        text = "${albumList.albEp} • ${albumList.artists}",
+                        fontSize = 14.sp,
+                        color = Color.LightGray,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    ) }
             }
         }
     }
