@@ -28,14 +28,14 @@ import com.google.accompanist.pager.rememberPagerState
 fun ShortsScreen() {
     val context = LocalContext.current
     val videoList = listOf(
-        "android.resource://${context.packageName}/${R.raw.sample2}",
         "android.resource://${context.packageName}/${R.raw.sample4}",
         "android.resource://${context.packageName}/${R.raw.sample5}",
-        "android.resource://${context.packageName}/${R.raw.sample1}",
-        "android.resource://${context.packageName}/${R.raw.sample6}",
-        "android.resource://${context.packageName}/${R.raw.sample7}",
-        "android.resource://${context.packageName}/${R.raw.sample3}",
         "android.resource://${context.packageName}/${R.raw.sample8}",
+        "android.resource://${context.packageName}/${R.raw.sample7}",
+        "android.resource://${context.packageName}/${R.raw.sample6}",
+        "android.resource://${context.packageName}/${R.raw.sample2}",
+        "android.resource://${context.packageName}/${R.raw.sample1}",
+        "android.resource://${context.packageName}/${R.raw.sample3}",
         "android.resource://${context.packageName}/${R.raw.sample9}",
     )
 

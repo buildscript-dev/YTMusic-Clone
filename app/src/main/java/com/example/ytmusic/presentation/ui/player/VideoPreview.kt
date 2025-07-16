@@ -27,12 +27,12 @@ fun VideoPreview(exoPlayer: ExoPlayer) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(220.dp), // can tweak if needed
+            .height(320.dp), // can tweak if needed
         contentAlignment = Alignment.Center
     ) {
         AndroidView(
             modifier = Modifier
-                .fillMaxWidth(0.9f) // 👈 this helps to center it better visually
+                .fillMaxWidth(0.9f)
                 .height(200.dp)
                 .clip(RoundedCornerShape(16.dp)),
             factory = {

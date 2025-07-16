@@ -57,7 +57,7 @@ fun SongPreview(
                 contentAlignment = Alignment.Center
             ) {
                 AsyncImage(
-                    model = "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e2/61/f8/e261f8c1-73db-9a7a-c89e-1068f19970e0/16UMGIM67863.rgb.jpg/592x592bb.webp",
+                    model = "https://is1-ssl.mzstatic.com/image/thumb/Video126/v4/88/70/e9/8870e976-1d4e-0ed6-d5a1-02cc6183558c/Job3b60a129-8c0d-4179-b6ec-903b71bf1b18-129193526-PreviewImage_preview_image_nonvideo_sdr-Time1645812297481.png/592x592bb.webp",
                     contentDescription = "Song Preview",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
@@ -67,14 +67,14 @@ fun SongPreview(
 
         // Song info
         Text(
-            "One of One",
+            "Shape of You",
             fontWeight = FontWeight.Bold,
             color = Color.White,
             fontSize = 26.sp,
             modifier = Modifier.padding(start = 30.dp)
         )
         Text(
-            "Jerry",
+            "Ed Sheeran",
             color = Color.LightGray,
             fontSize = 16.sp,
             modifier = Modifier.padding(start = 30.dp, top = 4.dp)

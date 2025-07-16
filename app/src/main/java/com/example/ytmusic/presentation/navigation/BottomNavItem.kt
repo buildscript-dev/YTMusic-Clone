@@ -68,11 +68,14 @@ fun BottomNavBar(navController: NavHostController) {
         BottomNavItem.Home,
         BottomNavItem.Samples,
         BottomNavItem.Explore,
-        BottomNavItem.Library
+        BottomNavItem.Library,
     )
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
+
+    // ❌ Don't show bottom bar on the Player screen
+    if (currentRoute == BottomNavItem.Player.route) return
 
     NavigationBar(
         containerColor = Color.Black,
@@ -109,7 +112,7 @@ fun BottomNavBar(navController: NavHostController) {
                 },
                 alwaysShowLabel = true,
                 colors = NavigationBarItemDefaults.colors(
-                    indicatorColor = Color(0xFF1A1A1A), // ✅ lighter than black
+                    indicatorColor = Color(0xFF1A1A1A),
                     selectedIconColor = Color.White,
                     selectedTextColor = Color.White,
                     unselectedIconColor = Color.Gray,

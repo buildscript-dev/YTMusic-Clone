@@ -41,14 +41,14 @@ fun VideoScreen(
 
         // Song info
         Text(
-            "One of One",
+            "Shape of You",
             fontWeight = FontWeight.Bold,
             color = Color.White,
             fontSize = 26.sp,
             modifier = Modifier.padding(start = 30.dp)
         )
         Text(
-            "Jerry",
+            "Ed Sheeran",
             color = Color.LightGray,
             fontSize = 16.sp,
             modifier = Modifier.padding(start = 30.dp, top = 4.dp)

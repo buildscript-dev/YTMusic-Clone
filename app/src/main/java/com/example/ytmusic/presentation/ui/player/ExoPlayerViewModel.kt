@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
-import com.example.ytmusic.data.remote.SongItem
+import com.example.ytmusic.data.local.Song
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,21 +27,23 @@ class ExoPlayerViewModel(app: Application) : AndroidViewModel(app) {
     private val _isPlaying = MutableStateFlow(false)
     val isPlaying = _isPlaying.asStateFlow()
 
-    private val _currentSong = MutableStateFlow<SongItem?>(null)
+    private val _currentSong = MutableStateFlow<Song?>(null)
     val currentSong = _currentSong.asStateFlow()
 
     init {
         viewModelScope.launch {
             while (true) {
                 _position.value = exoPlayer.currentPosition
-                _duration.value = exoPlayer.duration
+                // ExoPlayer may return -1 if duration isn't ready yet
+                val dur = exoPlayer.duration
+                _duration.value = if (dur > 0) dur else 0L
                 _isPlaying.value = exoPlayer.isPlaying
                 delay(500L)
             }
         }
     }
 
-    fun loadSong(song: SongItem) {
+    fun loadSong(song: Song) {
         _currentSong.value = song
 
         song.audioUrl?.let { url ->
@@ -49,17 +51,16 @@ class ExoPlayerViewModel(app: Application) : AndroidViewModel(app) {
             val mediaItem = MediaItem.fromUri(uri)
             exoPlayer.setMediaItem(mediaItem)
             exoPlayer.prepare()
+            exoPlayer.playWhenReady = true // plays when ready
         }
     }
 
     fun play() {
         exoPlayer.play()
-        _isPlaying.value = true
     }
 
     fun pause() {
         exoPlayer.pause()
-        _isPlaying.value = false
     }
 
     fun seekTo(pos: Long) {

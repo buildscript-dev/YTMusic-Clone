@@ -21,8 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.media3.common.MediaItem
 import androidx.navigation.NavController
-import com.example.ytmusic.R
-import com.example.ytmusic.data.remote.songList
+import com.example.ytmusic.data.local.songList
 
 
 @Composable
@@ -37,14 +36,17 @@ fun PlayerScreen(navController: NavController) {
     val duration by viewModel.duration.collectAsState()
 
     var selectedTab by remember { mutableStateOf("Song") }
+    var selectedSong by remember { mutableStateOf(songList[0]) } // default song
+
 
     // 🔁 Update media source when switching tabs
     LaunchedEffect(selectedTab) {
-        val mediaUri = if (selectedTab == "Song") {
-            Uri.parse("android.resource://${context.packageName}/${R.raw.musicstar}")
-        } else {
-            Uri.parse("android.resource://${context.packageName}/${R.raw.starboy}")
-        }
+        val mediaUri = Uri.parse(
+            "android.resource://${context.packageName}/${
+                if (selectedTab == "Song") selectedSong.audioResId else selectedSong.videoResId
+            }"
+        )
+
 
         val currentPos = exoPlayer.currentPosition
         exoPlayer.setMediaItem(MediaItem.fromUri(mediaUri))
@@ -62,7 +64,8 @@ fun PlayerScreen(navController: NavController) {
     ) {
         PlayerTop(
             selectedTab = selectedTab,
-            onTabSelected = { selectedTab = it }
+            onTabSelected = { selectedTab = it },
+            navController =navController
         )
 
         if (selectedTab == "Song") {
@@ -95,20 +98,26 @@ fun PlayerScreen(navController: NavController) {
 @Composable
 fun PlayerTop(
     selectedTab: String,
-    onTabSelected: (String) -> Unit
+    onTabSelected: (String) -> Unit,
+    navController: NavController
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 10.dp)
+            .padding(horizontal = 12.dp, vertical = 10.dp),
     ) {
         // ⬅️ Left Arrow
         Icon(
             imageVector = Icons.Default.KeyboardArrowDown,
             contentDescription = "Arrow Down",
             tint = Color.Gray,
-            modifier = Modifier.align(Alignment.CenterStart)
+            modifier = Modifier
+                .align(Alignment.CenterStart)
+                .clickable {
+                    navController.popBackStack() // ⬅️ this goes back to the previous screen
+                }
         )
+
 
         // 🎵 Tab Selector (Center)
         Row(

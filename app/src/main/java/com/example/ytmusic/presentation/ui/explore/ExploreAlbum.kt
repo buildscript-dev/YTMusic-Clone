@@ -29,38 +29,52 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.ytmusic.presentation.ui.home.albums
+import com.example.ytmusic.data.local.Song
 
 @Composable
-fun ExploreAblum(){
-    Column(){
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically) {
-            Text("New albums and single", color =  Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+fun ExploreAlbum(songList: List<Song>) {
+    Column {
+        // Section Title
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                "New albums and singles",
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp
+            )
             IconButton(onClick = {}) {
-                Icon(imageVector = Icons.Default.ArrowForwardIos, contentDescription = "Arrow", tint = Color.White)
-            } }
+                Icon(
+                    imageVector = Icons.Default.ArrowForwardIos,
+                    contentDescription = "Arrow",
+                    tint = Color.White
+                )
+            }
+        }
 
+        // Horizontal Scroller
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(horizontal = 8.dp)
         ) {
-
-            items(albums){ album ->
+            items(songList) { song ->
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.padding(2.dp) // just a bit of space around each item
+                    modifier = Modifier.padding(2.dp)
                 ) {
                     Card(
                         shape = RoundedCornerShape(8.dp),
                         modifier = Modifier
-                            .fillMaxWidth() // take full grid cell width
+                            .fillMaxWidth()
                             .height(150.dp)
                     ) {
                         AsyncImage(
-                            model = album.imageUrl,
-                            contentDescription = album.name,
+                            model = song.imageUrl,
+                            contentDescription = song.title,
                             contentScale = ContentScale.Crop,
                             modifier = Modifier.fillMaxSize()
                         )
@@ -69,7 +83,7 @@ fun ExploreAblum(){
                     Spacer(modifier = Modifier.height(6.dp))
 
                     Text(
-                        text = album.name,
+                        text = song.title ?: "Unknown Title",
                         fontSize = 12.sp,
                         color = Color.White,
                         maxLines = 1,
@@ -79,61 +93,29 @@ fun ExploreAblum(){
                     )
                 }
             }
-
         }
 
-
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically) {
-            Text("Moods and genres", color =  Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+        // You can keep your "Moods and Genres" section after this...
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                "Moods and genres",
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp
+            )
             IconButton(onClick = {}) {
-                Icon(imageVector = Icons.Default.ArrowForwardIos, contentDescription = "Arrow", tint = Color.White)
-            } }
-//        LazyVerticalGrid(
-//            columns = GridCells.Fixed(3),
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(horizontal = 4.dp),
-//            verticalArrangement = Arrangement.spacedBy(4.dp),
-//            horizontalArrangement = Arrangement.spacedBy(4.dp)
-//        ) {
-//            items(pages[page]) { album ->
-//                Column(
-//                    horizontalAlignment = Alignment.CenterHorizontally,
-//                    modifier = Modifier.padding(2.dp) // just a bit of space around each item
-//                ) {
-//                    Card(
-//                        shape = RoundedCornerShape(8.dp),
-//                        modifier = Modifier
-//                            .fillMaxWidth() // take full grid cell width
-//                            .aspectRatio(1f) // stay square
-//                    ) {
-//                        Box(modifier = Modifier.fillMaxSize()
-//                            .aspectRatio(0.1f)
-//                            .background(ColorBox)
-//                            .clip(RoundedCornerShape(8.dp)))
-//                    }
-//
-//
-//                 Text(
-//                        text = album.name,
-//                        fontSize = 12.sp,
-//                        color = Color.White,
-//                        maxLines = 1,
-//                        overflow = TextOverflow.Ellipsis,
-//                        textAlign = TextAlign.Center,
-//                        modifier = Modifier.fillMaxWidth()
-//                    )
-//                }
-//            }
-//        }
+                Icon(
+                    imageVector = Icons.Default.ArrowForwardIos,
+                    contentDescription = "Arrow",
+                    tint = Color.White
+                )
+            }
+        }
 
-
-
-
-
+        // That genre section (commented out in your code) can be updated next too if you want it to use Song or other data
     }
 }
-
-
-//data class mood(val name: String, val Color)

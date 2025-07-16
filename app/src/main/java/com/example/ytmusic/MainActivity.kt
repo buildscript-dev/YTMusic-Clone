@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             MaterialTheme {
                 Surface {
                     MainScaffold(navController = navController)
-//                    PlayerScreen()
+//                    PlayerScreen(navController= navController)
                 }
             }
         }

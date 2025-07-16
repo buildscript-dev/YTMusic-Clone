@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -70,6 +72,90 @@ fun QuickPickList(quickAlbums: List<QuickAlbum>) {
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .size(50.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                    )
+
+
+                    Column(
+                        modifier = Modifier.weight(1f)
+                            .padding(horizontal = 10.dp)
+                    ) {
+                        Text(
+                            text = album.name,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 16.sp,
+                            color = Color.White,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Text(
+                            text = "${album.artists} • ${album.views}",
+                            fontSize = 14.sp,
+                            color = Color.LightGray,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = Icons.Default.MoreVert,
+                            contentDescription = "More",
+                            tint = Color.White
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+@Composable
+fun LibraryList(quickAlbums: List<QuickAlbum>) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Recent activity",
+                fontSize = 16.sp,
+                color = Color.LightGray
+            )
+
+            IconButton(onClick = {}) {
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    contentDescription = "Arrow",
+                    tint = Color.White
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            quickAlbums.forEach { album ->
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    AsyncImage(
+                        model = album.imageUrl,
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(80.dp)
                             .clip(RoundedCornerShape(8.dp))
                     )
 

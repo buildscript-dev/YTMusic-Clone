@@ -1,6 +1,5 @@
 package com.example.ytmusic.presentation.ui.home
 
-import android.graphics.Paint
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,9 +17,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.HorizontalRule
 import androidx.compose.material.icons.filled.MoreHoriz
-import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,10 +36,10 @@ data class MusicVideoData(val title: String, val artists: String , val view: Str
 
 
 val musicVideo = listOf(
-    MusicVideoData(title = "One of One" , artists ="Jerry" , view = "53 lakh views" , imageUrl ="https://i.ytimg.com/vi/uKHlnmepnNA/maxresdefault.jpg") ,
-    MusicVideoData(title = "One of One" , artists ="Jerry" , view = "53 lakh views" , imageUrl ="https://i.ytimg.com/vi/uKHlnmepnNA/maxresdefault.jpg") ,
-    MusicVideoData(title = "One of One" , artists ="Jerry" , view = "53 lakh views" , imageUrl ="https://i.ytimg.com/vi/uKHlnmepnNA/maxresdefault.jpg") ,
-    MusicVideoData(title = "One of One" , artists ="Jerry" , view = "53 lakh views" , imageUrl ="https://i.ytimg.com/vi/uKHlnmepnNA/maxresdefault.jpg") ,
+    MusicVideoData(title = "Shape of You" , artists ="Ed Sheeran" , view = "19 crore views" , imageUrl ="https://is1-ssl.mzstatic.com/image/thumb/Video126/v4/88/70/e9/8870e976-1d4e-0ed6-d5a1-02cc6183558c/Job3b60a129-8c0d-4179-b6ec-903b71bf1b18-129193526-PreviewImage_preview_image_nonvideo_sdr-Time1645812297481.png/592x592bb.webp") ,
+    MusicVideoData(title = "Nayan" , artists ="Dhvani" , view = "41 lakh views" , imageUrl ="https://i.ytimg.com/vi/uKHlnmepnNA/maxresdefault.jpg") ,
+    MusicVideoData(title = "One of One" , artists ="Jerry" , view = "53 lakh views" , imageUrl ="https://t2.genius.com/unsafe/430x430/https%3A%2F%2Fimages.genius.com%2Ff2add902e6c9c99b9a26ef3380c05a49.554x554x1.jpg") ,
+    MusicVideoData(title = "My Prime" , artists ="Naveen" , view = "92 lakh views" , imageUrl ="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/65/90/6c/65906c76-5dee-5d65-bb46-818d5cc1dc7f/197338486085.jpg/592x592bb.webp") ,
 
     )
 
